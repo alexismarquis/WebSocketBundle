@@ -230,7 +230,7 @@ final class TopicDispatcher implements TopicDispatcherInterface, LoggerAwareInte
                     $appTopic->onUnSubscribe($conn, $topic, $request);
 
                     if (0 === \count($topic)) {
-                        $this->topicPeriodicTimer->clearPeriodicTimer($topic);
+                        $this->topicPeriodicTimer->cancelPeriodicTimer($topic);
                     }
 
                     break;
