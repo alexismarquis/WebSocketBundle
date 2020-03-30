@@ -60,6 +60,19 @@ class TopicPeriodicTimer implements \IteratorAggregate
         unset($this->registry[$topic->getId()][$name]);
     }
 
+    public function clearPeriodicTimer(Topic $topic): void
+    {
+        if (!isset($this->registry[$topic->getId()])) {
+            return;
+        }
+
+        foreach($this->registry[$topic->getId()] as $name => $timer) {
+            $this->loop->cancelTimer($timer);
+        }
+
+        unset($this->registry[$topic->getId()]);
+    }
+
     /**
      * @return \ArrayIterator|array<string, array<string, TimerInterface>>
      */
